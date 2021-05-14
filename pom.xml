@@ -69,6 +69,13 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.2.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -85,6 +92,29 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
+
+
+
+
+
+        <plugin>
+            <!--整合mysql和flyway-->
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+            <version>5.2.4</version>
+            <configuration>
+                <url>jdbc:mysql://localhost:3306/community?characterEncoding=utf-8</url>
+                <user>root</user>
+                <password>qwer6666</password>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>8.0.23</version>
+                </dependency>
+            </dependencies>
+        </plugin>
         </plugins>
     </build>
 

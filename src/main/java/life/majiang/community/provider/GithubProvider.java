@@ -28,7 +28,7 @@ public class GithubProvider {
 
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
+        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));        //获取token
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)

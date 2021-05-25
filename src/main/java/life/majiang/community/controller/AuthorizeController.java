@@ -4,6 +4,7 @@ import life.majiang.community.dto.AccessTokenDTO;
 import life.majiang.community.dto.GithubUser;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.User;
+import life.majiang.community.model.UserExample;
 import life.majiang.community.provider.GithubProvider;
 import life.majiang.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -63,13 +65,19 @@ public class AuthorizeController {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setAccount(String.valueOf(githubUser.getId()));
             user.setName(githubUser.getName());
             user.setAvatarUrl(githubUser.getAvatar_url());
             userService.createOrUpdate(user);
             System.out.println(githubUser);
 
-            user.setId(userMapper.findByAccountId(user.getAccountId()).getId());
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andAccountEqualTo(user.getAccount());
+
+
+            List<User> users = userMapper.selectByExample(userExample);
+            user.setId(userMapper.selectByExample(userExample).get(0).getId());
+            //user.setId(userMapper.findByAccountId(user.getAccount()).getId());
             response.addCookie(new Cookie("token",token));
             request.getSession().setAttribute("user",user);
             return "redirect:/";

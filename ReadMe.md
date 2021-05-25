@@ -17,3 +17,10 @@
 
 ##工具
 [Git]
+
+```bash
+mvn flyway:migrate
+
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+```
+

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
+ * 判断用户是否已经登录
  * @ClassName SessionInterceptor
  * @Description TODO
  * @date 2021/5/19 17:38

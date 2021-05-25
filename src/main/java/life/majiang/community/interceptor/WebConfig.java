@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * 过滤器
  * @ClassName WebConfig
  * @Description TODO
  * @date 2021/5/19 17:24

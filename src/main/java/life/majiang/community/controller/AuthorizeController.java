@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * 第三方登录授权
  * @ClassName AuthorizeController
  * @Description TODO
  * @date 2021/5/11 22:42

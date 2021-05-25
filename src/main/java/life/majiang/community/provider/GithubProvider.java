@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 /**
+ * 获取GitHub登录信息，用户信息
  * @ClassName GithubProvider
  * @Description TODO
  * @date 2021/5/12 13:18

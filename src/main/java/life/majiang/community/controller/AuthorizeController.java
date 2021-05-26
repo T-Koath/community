@@ -27,7 +27,7 @@ import java.util.UUID;
  * @Version 1.0
  */
 @Controller
-public class AuthorizeController {
+public class  AuthorizeController {
 
     @Autowired
     private GithubProvider githubProvider;
@@ -78,7 +78,6 @@ public class AuthorizeController {
 
             List<User> users = userMapper.selectByExample(userExample);
             user.setId(userMapper.selectByExample(userExample).get(0).getId());
-            //user.setId(userMapper.findByAccountId(user.getAccount()).getId());
             response.addCookie(new Cookie("token",token));
             request.getSession().setAttribute("user",user);
             return "redirect:/";

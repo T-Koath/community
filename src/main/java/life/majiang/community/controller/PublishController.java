@@ -2,8 +2,6 @@ package life.majiang.community.controller;
 
 
 import life.majiang.community.dto.QuestionDTO;
-import life.majiang.community.mapper.QuestionMapper;
-import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Question;
 import life.majiang.community.model.User;
 import life.majiang.community.service.QuestionService;
@@ -32,7 +30,7 @@ public class PublishController extends HttpServlet {
     private QuestionService questionService;
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id")Integer id,
+    public String edit(@PathVariable(name = "id")Long id,
                        Model model){
         QuestionDTO question = questionService.getById(id);
 
@@ -56,7 +54,7 @@ public class PublishController extends HttpServlet {
             @RequestParam(value = "title" ,required = false) String title,
             @RequestParam(value = "description",required = false) String description,
             @RequestParam(value = "tag",required = false) String tag,
-            @RequestParam(value = "id",required = false) Integer id,
+            @RequestParam(value = "id",required = false) Long id,
             HttpServletRequest request,
             Model model
     ) {

@@ -9,7 +9,7 @@ package life.majiang.community.exception;
  */
 public enum CustomizeErrorCode implements ICustomizeErrorCode{
 
-    Question_Not_Found(2001,"你找的问题不存在!"),
+    Question_Not_Found(2001,"你找的问题不存在!换个试试叭！"),
     TARGET_PARAM_Not_Found(2002,"未选中任何问题或评论进行回复!"),
     NO_LOGIN(2003,"当前操作需登录，请登录后重试!"),
     SYS_ERROR(2004,"服务器炸了，请稍后重试!"),

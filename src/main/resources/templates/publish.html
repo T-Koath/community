@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>发布 - 码匠社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/community.css">
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
 <div th:insert="navigation :: nav"></div>
@@ -18,23 +19,50 @@
             <hr>
 
             <form action="/publish" method="post">
-                <input type="hidden"name="id" th:value="${id}">
+                <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题 (简单扼要) :</label>
-                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" placeholder="问题标题">
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title"
+                           placeholder="问题标题">
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充 (必填，参照右侧提示) :</label>
-                    <textarea name="description" th:text="${description}" id="description" class="form-control" cols="30" rows="10"></textarea>    <!-- 回调，把输入的回调，不会丢失 -->
+                    <textarea name="description" th:text="${description}" id="description" class="form-control"
+                              cols="30" rows="10"></textarea>    <!-- 回调，把输入的回调，不会丢失 -->
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签 :</label>
-                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag" placeholder="输入标签，以`,`号分隔">
+                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag" autocomplete="off"
+                           placeholder="输入标签，以`,`号分隔"
+                           onclick="showSelectTag()">
+
+                    <div th:id="select-tag" class="publish-tag-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" th:each="selectCategory,selectCategoryStat : ${tags}" th:class="${selectCategoryStat.first ? 'active' : ''}">
+                                <a th:href="${'#'+selectCategory.categoryName}" aria-controls="home" role="tab"
+                                   data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane" th:id="${selectCategory.categoryName}"
+                                 th:each="selectCategory : ${tags}" th:class="${selectCategoryStat.first ? 'active tab-pane' : 'tab-pane'}">
+                                 <span class="label label-info" th:each="selectTag : ${selectCategory.tags}">
+                                     <span class="glyphicon glyphicon-tags" onclick="selectTag(this)"
+                                           th:data-tag="${selectTag}" th:text="${' '+selectTag}">
+                                     </span>
+                                 </span>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
                 <div class="container-fluid main">
                     <div class="row">
-                        <span class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:if="${error} != null" th:text="${error}" ></span>
+                        <span class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:if="${error} != null"
+                              th:text="${error}"></span>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" role="alert">
                             <button type="submit" class="btn btn-success btn-publish">发布</button>
                         </div>

@@ -1,10 +1,13 @@
 package life.majiang.community.controller;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import life.majiang.community.cache.TagCache;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.model.Question;
 import life.majiang.community.model.User;
 import life.majiang.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,12 +42,14 @@ public class PublishController extends HttpServlet {
         model.addAttribute("tag", question.getTag());
         model.addAttribute("id",question.getId());
 
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -61,6 +66,7 @@ public class PublishController extends HttpServlet {
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
+        model.addAttribute("tags", TagCache.get());
 
         if (title == null || title == "") {
             model.addAttribute("error", "标题不能为空");
@@ -72,6 +78,12 @@ public class PublishController extends HttpServlet {
         }
         if (tag == null || tag == "") {
             model.addAttribute("error", "标签不能为空");
+            return "publish";
+        }
+
+        String invalid = TagCache.filterInvalid(tag);
+        if (StringUtils.isNotBlank(invalid)){
+            model.addAttribute("error","输入非法标签"+invalid);
             return "publish";
         }
 

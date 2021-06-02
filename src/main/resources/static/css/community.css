@@ -48,8 +48,20 @@ body{
     width: 100%;
 }
 
+.publish-tag-tab{
+    display: none;
+    margin-top: 10px;
+    margin-top: 10px;
+}
+
+
+.publish-tag-tab .label-info{
+    margin: 5px 5px;
+    white-space: normal;
+    display: inline-block;
+}
+
 .community-menu{
-    display: block;
     font-size: 13px;
     color: #999;
     margin-bottom: 15px;

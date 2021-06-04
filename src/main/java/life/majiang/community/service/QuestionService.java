@@ -78,7 +78,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestionDTOList(questionDTOList);      //列表放入dto
+        paginationDTO.setData(questionDTOList);      //列表放入dto
         return paginationDTO;
     }
 
@@ -133,7 +133,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestionDTOList(questionDTOList);      //列表放入dto
+        paginationDTO.setData(questionDTOList);      //列表放入dto
         return paginationDTO;
     }
 
